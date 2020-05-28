@@ -1289,8 +1289,8 @@ class MonsterIndex(object):
             prefixes.add('chibi')
 
         awoken = lower_name.startswith('awoken') or '覚醒' in lower_name
-        revo = lower_name.startswith('reincarnated') or '転生' in lower_name
-        srevo = lower_name.startswith('super reincarnated') or '超転生' in lower_name
+        revo = m.true_evo_type == InternalEvoType.Reincarnated
+        srevo = m.true_evo_type == InternalEvoType.SuperReincarnated
         mega = lower_name.startswith('mega awoken') or '極醒' in lower_name
         awoken_or_revo_or_equip_or_mega = awoken or revo or m.is_equip or mega
 
