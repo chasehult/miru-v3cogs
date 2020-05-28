@@ -1298,6 +1298,7 @@ class MonsterIndex(object):
         # actually Evos but have awoken in the name
         if awoken:
             prefixes.add('a')
+            prefixes.add('avo')
             prefixes.add('awoken')
 
         if revo:
