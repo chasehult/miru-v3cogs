@@ -195,7 +195,7 @@ class PadInfo(commands.Cog):
         self.index_na = await dg_cog.create_index(lambda m: m.on_na)
 
         logger.info('Loading JP index')
-        self.index_jp = dg_cog.create_index(lambda m: m.on_jp)
+        self.index_jp = await dg_cog.create_index(lambda m: m.on_jp)
 
         logger.info('Done refreshing indexes')
         if ctx is not None:
