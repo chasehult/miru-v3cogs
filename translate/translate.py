@@ -47,18 +47,28 @@ class Translate(commands.Cog):
         em = self.translate_to_embed("ja", "en", query)
         await ctx.send(embed=em)
 
+    @commands.command(aliases=['zhus'])
+    async def zhen(self, ctx, *, query):
+        """Translates from Chinese to English"""
+        if not self.service:
+            await ctx.send(inline('Set up an API key first!'))
+            return
+
+        em = self.translate_to_embed("zh", "en", query)
+        await ctx.send(embed=em)
+
     @commands.command()
     async def kanrom(self, ctx, *, query):
         """Transliterates Kanji to Romanji"""
         await ctx.send(romkan.to_roma(query))
 
 
-    def translate_jp_en(self, source, target, query):
+    def translate_lang(self, source, target, query):
         result = self.service.translations().list(source=source, target=target, format='text', q=query).execute()
         return result.get('translations')[0].get('translatedText')
 
     def translate_to_embed(self, source, target, query):
-        translation = self.translate_jp_en(source, target, query)
+        translation = self.translate_lang(source, target, query)
         return discord.Embed(description='**Original**\n`{}`\n\n**Translation**\n`{}`'.format(query, translation))
 
     @translate.command()
